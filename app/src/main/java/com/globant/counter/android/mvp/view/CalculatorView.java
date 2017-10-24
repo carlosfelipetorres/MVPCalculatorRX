@@ -33,6 +33,18 @@ public class CalculatorView extends ActivityView {
         resultLabel.setText(result);
     }
 
+    public void setFirstNumberInput(String result) {
+        firstNumberInput.setText(result);
+    }
+
+    public void setSecondNumberInput(String result) {
+        secondNumberInput.setText(result);
+    }
+
+    public void setOperatorInput(String result) {
+        operatorInput.setText(result);
+    }
+
     public void setError(int id) {
         resultLabel.setText(getActivity().getString(id));
     }
