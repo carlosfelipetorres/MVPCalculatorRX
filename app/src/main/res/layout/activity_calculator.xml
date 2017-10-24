@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/first_number_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/first_input"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textSize="@dimen/activity_main_input_text_size"/>
+
+    <EditText
+        android:id="@+id/operator_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/operator"
+        android:textAlignment="center"
+        android:textSize="@dimen/activity_main_input_text_size"/>
+
+    <EditText
+        android:id="@+id/second_number_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/second_number"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textSize="@dimen/activity_main_input_text_size"/>
+
+    <Button
+        android:id="@+id/result_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/equals"
+        android:textSize="@dimen/activity_main_text_size"/>
+
+    <TextView
+        android:id="@+id/result_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/intial_value"
+        android:maxLength="14"
+        android:textSize="@dimen/activity_main_text_size"/>
+
+</LinearLayout>
