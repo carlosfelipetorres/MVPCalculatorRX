@@ -1,6 +1,9 @@
 package com.globant.counter.android.mvp.presenter;
 
+import com.globant.counter.android.R;
+import com.globant.counter.android.mvp.model.CalculatorModel;
 import com.globant.counter.android.mvp.model.CountModel;
+import com.globant.counter.android.mvp.view.CalculatorView;
 import com.globant.counter.android.mvp.view.CountView;
 
 import org.junit.Before;
@@ -21,38 +24,43 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
  */
 public class PresenterTest {
 
-    private CountPresenter presenter;
-    @Mock CountModel model;
-    @Mock CountView view;
+    private CalculatorPresenter presenter;
+    @Mock CalculatorModel model;
+    @Mock CalculatorView view;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        presenter = new CountPresenter(model, view);
+        presenter = new CalculatorPresenter(model, view);
     }
 
     @Test
-    public void shouldIncCountByOne() {
-        when(model.getCount()).thenReturn(1);
+    public void shouldCalculateResult() {
+        when(model.getResult()).thenReturn(12.0);
+        when(view.getFirstInput()).thenReturn("6.0");
+        when(view.getSecondInput()).thenReturn("6.0");
+        when(view.getOperatorInput()).thenReturn("+");
         presenter.onCountButtonPressed();
-        verify(model).inc();
-        verify(view).setCount("1");
-        verifyNoMoreInteractions(view);
     }
 
     @Test
-    public void shouldResetCount() {
-        when(model.getCount()).thenReturn(3);
+    public void shouldShowOperatorError() {
+        when(model.getResult()).thenReturn(0.0);
+        when(view.getFirstInput()).thenReturn("6.0");
+        when(view.getSecondInput()).thenReturn("6.0");
+        when(view.getOperatorInput()).thenReturn("+*");
         presenter.onCountButtonPressed();
-        presenter.onCountButtonPressed();
-        presenter.onCountButtonPressed();
-        verify(model,times(3)).inc();
-        assertEquals(model.getCount(), 3);
-        when(model.getCount()).thenReturn(0);
-        presenter.onResetButtonPressed();
-        verify(model).reset();
-        assertEquals(model.getCount(), 0);
-        verify(view, times(4)).setCount(anyString());
-        verifyNoMoreInteractions(view);
+        verify(view).setError(R.string.error_invalid_operator);
     }
+
+    @Test
+    public void shouldShowInputError() {
+        when(model.getResult()).thenReturn(0.0);
+        when(view.getFirstInput()).thenReturn("");
+        when(view.getSecondInput()).thenReturn("6.0");
+        when(view.getOperatorInput()).thenReturn("+");
+        presenter.onCountButtonPressed();
+        verify(view).setError(R.string.error_empty_field);
+    }
+
 }
