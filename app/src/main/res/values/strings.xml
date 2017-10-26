@@ -3,4 +3,10 @@
     <string name="intial_value">0</string>
     <string name="inc">inc</string>
     <string name="reset">reset</string>
+    <string name="equals">=</string>
+    <string name="first_input">First number</string>
+    <string name="second_number">Second number</string>
+    <string name="operator">Operator</string>
+    <string name="error_empty_field">Empty field</string>
+    <string name="error_invalid_operator">Invalid operator</string>
 </resources>
