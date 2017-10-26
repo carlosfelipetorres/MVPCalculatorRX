@@ -10,33 +10,33 @@ import com.globant.counter.android.util.bus.observers.CountButtonUpBusObserver;
 
 public class CalculatorPresenter {
 
-    private CalculatorModel model;
-    private CalculatorView view;
+    private CalculatorModel calculatorModel;
+    private CalculatorView calculatorView;
 
     public CalculatorPresenter(CalculatorModel model, CalculatorView view) {
-        this.model = model;
-        this.view = view;
+        this.calculatorModel = model;
+        this.calculatorView = view;
     }
 
     public void onCountButtonPressed() {
-        String firstInput = view.getFirstInput();
-        String secondInput = view.getSecondInput();
-        String operatorInput = view.getOperatorInput();
+        String firstInput = calculatorView.getFirstInput();
+        String secondInput = calculatorView.getSecondInput();
+        String operatorInput = calculatorView.getOperatorInput();
 
         if(firstInput.isEmpty() || secondInput.isEmpty() || operatorInput.isEmpty()){
-            view.setError(R.string.error_empty_field);
+            calculatorView.setError(R.string.error_empty_field);
         } else if(!operatorInput.matches("[-+*/!]")){
-            view.setError(R.string.error_invalid_operator);
+            calculatorView.setError(R.string.error_invalid_operator);
         } else {
-            model.calculateOperation(Double.parseDouble(view.getFirstInput()),
-                    Double.parseDouble(view.getSecondInput()), view.getOperatorInput());
-            view.setResult(String.valueOf(model.getResult()));
+            calculatorModel.calculateOperation(Double.parseDouble(calculatorView.getFirstInput()),
+                    Double.parseDouble(calculatorView.getSecondInput()), calculatorView.getOperatorInput());
+            calculatorView.setResult(String.valueOf(calculatorModel.getResult()));
         }
 
     }
 
     public void register() {
-        Activity activity = view.getActivity();
+        Activity activity = calculatorView.getActivity();
 
         if (activity == null) {
             return;
@@ -52,7 +52,7 @@ public class CalculatorPresenter {
     }
 
     public void unregister() {
-        Activity activity = view.getActivity();
+        Activity activity = calculatorView.getActivity();
 
         if (activity == null) {
             return;
